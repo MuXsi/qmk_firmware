@@ -239,6 +239,10 @@ ifneq ($(strip $(EEPROM_DRIVER)),none)
           OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_WEAR_LEVELING
           SRC += eeprom_driver.c eeprom_wear_leveling.c
           WEAR_LEVELING_DRIVER ?= rp2040_flash
+        else ifneq ($(filter $(MCU_SERIES),RP2350),)
+          # Use transient EEPROM until the RP2350 ChibiOS EFL path is wired into QMK.
+          OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_TRANSIENT
+          SRC += eeprom_driver.c eeprom_transient.c
         else ifneq ($(filter $(MCU_SERIES),KL2x K20x),)
           # Teensy EEPROM implementations
           OPT_DEFS += -DEEPROM_KINETIS_FLEXRAM
@@ -1023,7 +1027,7 @@ endif
 
 ifeq ($(strip $(UART_DRIVER_REQUIRED)), yes)
     ifeq ($(strip $(PLATFORM)), CHIBIOS)
-        ifneq ($(filter $(MCU_SERIES),RP2040),)
+        ifneq ($(filter $(MCU_SERIES),RP2040 RP2350),)
             OPT_DEFS += -DHAL_USE_SIO=TRUE
             QUANTUM_LIB_SRC += uart_sio.c
         else

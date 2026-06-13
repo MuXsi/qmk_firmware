@@ -105,6 +105,7 @@
  * USB driver system settings.
  */
 #define RP_USB_USE_USBD0                    TRUE
+#define RP_USB_USE_USB1                     TRUE
 #define RP_USB_FORCE_VBUS_DETECT            TRUE
 #define RP_USE_EXTERNAL_VBUS_DETECT         FALSE
 #define RP_USB_USE_ERROR_DATA_SEQ_INTR      FALSE

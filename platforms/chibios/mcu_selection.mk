@@ -159,9 +159,7 @@ ifneq ($(findstring RP2040, $(MCU)),)
   # Linker script to use
   # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
   #   or <keyboard_dir>/ld/
-  STARTUPLD_CONTRIB = $(CHIBIOS_CONTRIB)/os/common/startup/ARMCMx/compilers/GCC/ld
-  MCU_LDSCRIPT ?= RP2040_FLASH_TIMECRIT
-  LDFLAGS += -L $(STARTUPLD_CONTRIB)
+  MCU_LDSCRIPT ?= RP2040_FLASH
 
   # Startup code to use
   #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
@@ -173,6 +171,44 @@ ifneq ($(findstring RP2040, $(MCU)),)
 
   # Default UF2 Bootloader settings
   UF2_FAMILY ?= RP2040
+  FIRMWARE_FORMAT ?= uf2
+endif
+
+ifneq ($(findstring RP2350, $(MCU)),)
+  # Cortex version
+  MCU = cortex-m33
+
+  # ChibiOS RP2350 uses the RP2-specialized Cortex-M33 port.
+  CHIBIOS_PORT = ARMv8-M-ML-ALT
+  PORT_V = $(CHIBIOS)/os/common/ports/ARMv8-M-ML-ALT/compilers/GCC/mk/port_rp2.mk
+
+  # FPU settings matching the ChibiOS RP2350/Pico 2 reference demo.
+  USE_FPU ?= softfp
+  FPU_OPTS ?= -mfloat-abi=$(USE_FPU) -mfpu=fpv5-sp-d16
+
+  ## chip/board settings
+  # - the next two should match the directories in
+  #   <chibios[-contrib]>/os/hal/ports/$(MCU_PORT_NAME)/$(MCU_SERIES)
+  #   OR
+  #   <chibios[-contrib]>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
+  MCU_FAMILY = RP
+  MCU_SERIES = RP2350
+
+  # Linker script to use
+  # - it should exist either in <chibios>/os/common/startup/ARMCMx/compilers/GCC/ld/
+  #   or <keyboard_dir>/ld/
+  MCU_LDSCRIPT ?= RP2350_FLASH
+
+  # Startup code to use
+  #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
+  MCU_STARTUP ?= rp2350
+
+  # Board: it should exist either in <chibios>/os/hal/boards/,
+  # <keyboard_dir>/boards/, or drivers/boards/
+  BOARD ?= RP_PICO2_RP2350
+
+  # Default UF2 Bootloader settings
+  UF2_FAMILY ?= RP2350_ARM_S
   FIRMWARE_FORMAT ?= uf2
 endif
 

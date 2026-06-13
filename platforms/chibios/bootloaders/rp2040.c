@@ -39,7 +39,7 @@ const uint32_t                                                              magi
 void __late_init(void) {
     // All clocks have to be enabled before jumping to the bootloader function,
     // otherwise the bootrom will be stuck infinitely.
-    clocks_init();
+    rp_clock_init();
 
     if (magic_location != magic_token) {
         magic_location = magic_token;
