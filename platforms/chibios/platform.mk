@@ -59,11 +59,13 @@ else
 
     # Port files. Try a few different locations, for compability with old versions and
     # for things hardware in the contrib repository
-    PORT_V = $(CHIBIOS)/os/common/ports/$(CHIBIOS_PORT)/compilers/GCC/mk/port.mk
-    ifeq ("$(wildcard $(PORT_V))","")
-        PORT_V = $(CHIBIOS)/os/rt/ports/ARMCMx/compilers/GCC/mk/port_v$(ARMV)m.mk
+    ifeq ("$(PORT_V)","")
+        PORT_V = $(CHIBIOS)/os/common/ports/$(CHIBIOS_PORT)/compilers/GCC/mk/port.mk
         ifeq ("$(wildcard $(PORT_V))","")
-            PORT_V = $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/mk/port_v$(ARMV)m.mk
+            PORT_V = $(CHIBIOS)/os/rt/ports/ARMCMx/compilers/GCC/mk/port_v$(ARMV)m.mk
+            ifeq ("$(wildcard $(PORT_V))","")
+                PORT_V = $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/mk/port_v$(ARMV)m.mk
+            endif
         endif
     endif
 
@@ -88,9 +90,13 @@ ifeq ("$(MCU_PORT_NAME)","")
 endif
 
 ifeq ("$(wildcard $(PLATFORM_MK))","")
-    PLATFORM_MK = $(CHIBIOS_CONTRIB)/os/hal/ports/$(MCU_PORT_NAME)/$(MCU_SERIES)/$(PLATFORM_NAME).mk
-    ifeq ("$(wildcard $(PLATFORM_MK))","")
+    ifeq ($(strip $(MCU_FAMILY)),RP)
         PLATFORM_MK = $(CHIBIOS)/os/hal/ports/$(MCU_PORT_NAME)/$(MCU_SERIES)/$(PLATFORM_NAME).mk
+    else
+        PLATFORM_MK = $(CHIBIOS_CONTRIB)/os/hal/ports/$(MCU_PORT_NAME)/$(MCU_SERIES)/$(PLATFORM_NAME).mk
+        ifeq ("$(wildcard $(PLATFORM_MK))","")
+            PLATFORM_MK = $(CHIBIOS)/os/hal/ports/$(MCU_PORT_NAME)/$(MCU_SERIES)/$(PLATFORM_NAME).mk
+        endif
     endif
 endif
 
@@ -279,7 +285,7 @@ PLATFORM_SRC = \
         $(PLATFORMSRC) \
         $(BOARDSRC) \
         $(STREAMSSRC) \
-        $(CHIBIOS)/os/various/syscalls.c \
+        $(CHIBIOS)/os/various/newlib_bindings/syscalls.c \
         $(PLATFORM_COMMON_DIR)/syscall-fallbacks.c \
         $(PLATFORM_COMMON_DIR)/wait.c \
         $(PLATFORM_COMMON_DIR)/synchronization_util.c \
@@ -294,9 +300,9 @@ EXTRAINCDIRS += $(CHIBIOS)/os/license \
          $(TOP_DIR)/platforms/chibios/boards/$(BOARD)/configs \
          $(TOP_DIR)/platforms/chibios/boards/common/configs \
          $(HALCONFDIR) $(CHCONFDIR) \
-         $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) $(OSLIBINC) \
+         $(STARTUPINC) $(KERNINC) $(PORTINC) $(ARMCOMMONINC) $(OSALINC) $(OSLIBINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
-         $(STREAMSINC) $(CHIBIOS)/os/various $(COMMON_VPATH)
+         $(STREAMSINC) $(CHIBIOS)/os/common/oop/include $(CHIBIOS)/os/various $(COMMON_VPATH)
 
 #
 # QMK specific MCU family support selection.
