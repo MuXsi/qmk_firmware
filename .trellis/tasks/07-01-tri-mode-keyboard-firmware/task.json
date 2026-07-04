@@ -1,0 +1,29 @@
+{
+  "id": "tri-mode-keyboard-firmware",
+  "name": "tri-mode-keyboard-firmware",
+  "title": "机械键盘三模固件",
+  "description": "RP2350/QMK/Vial 主控通过 SPI 控制 CH592F，实现 USB、BLE、2.4G 三模机械键盘固件。",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P2",
+  "creator": "MS",
+  "assignee": "MS",
+  "createdAt": "2026-07-01",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "vial",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [
+    "07-01-rp2350-vial-wc-spi-skeleton",
+    "07-03-rp2350b-hardware-baseline"
+  ],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {}
+}

@@ -1,0 +1,5 @@
+{"_example": "Fill with {\"file\": \"<path>\", \"reason\": \"<why>\"}. Put spec/research files only — no code paths. Run `python3 .trellis/scripts/get_context.py --mode packages` to list available specs. Delete this line once real entries are added."}
+{"file": "/home/s/mounriver-studio-projects/CH592F/APP/include/wireless_proto.h", "reason": "Reference only: existing CH592F SPI protocol differs from the new protocol"}
+{"file": "keyboards/handwired/pico2_rp2350_test/keymaps/vial/config.h", "reason": "Vial UID, unlock combo, and EEPROM configuration acceptance check"}
+{"file": "keyboards/handwired/pico2_rp2350_test/config.h", "reason": "SPI pin and timing configuration acceptance check"}
+{"file": "keyboards/handwired/pico2_rp2350_test/mcuconf.h", "reason": "RP2350 SPI0 enablement acceptance check"}

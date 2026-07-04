@@ -1,0 +1,5 @@
+{"_example": "Fill with {\"file\": \"<path>\", \"reason\": \"<why>\"}. Put spec/research files only — no code paths. Run `python3 .trellis/scripts/get_context.py --mode packages` to list available specs. Delete this line once real entries are added."}
+{"file": "keyboards/handwired/pico2_rp2350_test/keyboard.json", "reason": "RP2350 two-key keyboard definition and Vial USB identity"}
+{"file": "drivers/spi_master.h", "reason": "QMK SPI master API used by the wireless coprocessor skeleton"}
+{"file": "keyboards/handwired/pico2_rp2350_test/wireless_coprocessor.c", "reason": "New QMK-side CH592F SPI protocol skeleton implementation"}
+{"file": "keyboards/handwired/pico2_rp2350_test/wireless_coprocessor.h", "reason": "New wireless coprocessor protocol public API and wire types"}

@@ -1,0 +1,2 @@
+{"file": ".trellis/spec/firmware/rp2350b-hardware-baseline.md", "reason": "RP2350B pin map, matrix bring-up, RGB defer rules"}
+{"file": ".trellis/spec/firmware/wireless-coprocessor-protocol.md", "reason": "CH592 SPI frame contract and tri-mode HID routing"}

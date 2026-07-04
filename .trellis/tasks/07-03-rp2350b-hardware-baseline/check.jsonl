@@ -1,0 +1,2 @@
+{"file": ".trellis/spec/firmware/index.md", "reason": "Firmware spec index and build commands for quality gate"}
+{"file": ".trellis/spec/firmware/wireless-coprocessor-protocol.md", "reason": "Validation matrix and test assertions for trellis-check"}
